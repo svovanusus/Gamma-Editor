@@ -1,0 +1,29 @@
+.btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background: #f50;
+  border: none;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 5px;
+  transition: background ease-in-out .15s;
+
+  &:hover {
+    background: darken(#f50, 15%);
+  }
+}
+
+.node {
+  .columns {
+    display: flex;
+    justify-content: stretch;
+    align-items: flex-start;
+    
+    & > * {
+      width: 100%;
+      flex: 0 1 auto;
+    }
+  }
+}

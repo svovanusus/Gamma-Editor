@@ -1,0 +1,16 @@
+<svg width="180" height="70" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG Editor - http://github.com/mzalive/SVG Editor/ -->
+ <g>
+  <title>background</title>
+  <rect fill="#ffffff" opacity="0.1" id="canvas_background" height="72" width="182" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>foreground</title>
+  <text stroke="#000" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Oswald, sans-serif" font-size="43" id="svg_1" y="63.666648" x="6.265625" stroke-width="0" fill="#ffffff">GAMMA</text>
+  <rect y="0" stroke="#000" id="svg_2" height="28.000001" width="78" x="96.333374" stroke-width="0" fill="#8c52ff"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Oswald, sans-serif" font-size="16" id="svg_3" y="20" x="105.731875" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">EDITOR</text>
+ </g>
+</svg>

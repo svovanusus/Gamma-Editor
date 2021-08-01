@@ -1,0 +1,97 @@
+html {
+  box-sizing: border-box;
+  overflow-y: scroll;
+  /* All browsers without overlaying scrollbars */
+  -webkit-text-size-adjust: 100%;
+  /* Prevent adjustments of font size after orientation changes in iOS */
+  word-break: normal;
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+*,
+::before,
+::after {
+  background-repeat: no-repeat;
+  /* Set `background-repeat: no-repeat` to all elements and pseudo elements */
+  box-sizing: inherit;
+}
+
+::before,
+::after {
+  text-decoration: inherit;
+  /* Inherit text-decoration and vertical align to ::before and ::after pseudo elements */
+  vertical-align: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@import '~vuetify/src/styles/main.sass';
+
+.node {
+  position: relative;
+
+  
+  &:hover {
+    & > .outlinear:not(.hide) {
+      box-shadow: inset 0 0 0 1px map-deep-get($light-blue, 'darken-2'),
+    }
+  }
+
+  & > .outlinear {
+    display: block;
+
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+    user-select: none;
+    background: transparent;
+
+    transition: box-shadow ease-in-out 0.15s;
+
+    &.show {
+      box-shadow: inset 0 0 0 1px map-deep-get($light-blue, 'darken-2'),
+        0 0 5px 0 map-deep-get($light-blue, 'darken-2') !important;
+
+      &.hide {
+        box-shadow: 0 0 5px 0 map-deep-get($light-blue, 'darken-2') !important;
+      }
+    }
+  }
+
+  .node-toolbar {
+    z-index: 11!important;
+    margin-top: -50px;
+
+    .v-toolbar__content {
+      padding: 0;
+    }
+  }
+}
+
+.node-placeholder {
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 120px;
+  padding: 10px;
+  border: 20px solid map-deep-get($grey, 'base');
+  background: map-deep-get($grey, 'lighten-4');
+  color: map-deep-get($grey, 'base');
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 25px;
+}
