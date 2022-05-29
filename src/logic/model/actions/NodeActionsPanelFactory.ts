@@ -7,6 +7,7 @@ import NodeBase from 'logic/model/page/NodeBase';
 import ButtonNodeActionsPanelCreator from 'logic/model/actions/panel-creators/ButtonNodeActionsPanelCreator';
 import SimpleContainerNodeActionsPanelCreator from 'logic/model/actions/panel-creators/SimpleContainerNodeActionsPanelCreator';
 import ColumnsContainerNodeActionsPanelCreator from 'logic/model/actions/panel-creators/ColumnsContainerNodeActionsPanelCreator';
+import ImageNodeActionsPanelCreator from 'logic/model/actions/panel-creators/ImageNodeActionsPanelCreator';
 
 export default class NodeActionsPanelFactory {
   private static _instance: NodeActionsPanelFactory = null;
@@ -30,6 +31,9 @@ export default class NodeActionsPanelFactory {
 
     this.nodeActionsPanelTable[NodeTypeEnum.ColumnsContainerNodeType] =
       new ColumnsContainerNodeActionsPanelCreator();
+
+    this.nodeActionsPanelTable[NodeTypeEnum.ImageNodeType] =
+      new ImageNodeActionsPanelCreator();
   }
 
   public static getInstance(): NodeActionsPanelFactory {

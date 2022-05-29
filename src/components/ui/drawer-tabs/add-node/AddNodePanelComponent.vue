@@ -1,18 +1,21 @@
 <template>
   <v-container fluid>
     <v-row v-if="state.currentNode">
+      <v-col cols="12">
+        <v-toolbar-title>TEST</v-toolbar-title>
+      </v-col>
       <v-col v-for="btn in buttons" :key="`add-node-${btn.nodeType.toString()}-btn`" cols="12">
-          <v-sheet outlined rounded>
-            <v-list-item href="#" @click="() => itemClick(btn.nodeType)">
-              <v-list-item-icon>
-                <v-icon>{{ btn.icon }}</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>{{ btn.title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ btn.description }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-sheet>
+        <v-sheet outlined rounded>
+          <v-list-item href="#" @click="() => itemClick(btn.nodeType)">
+            <v-list-item-icon>
+              <v-icon>{{ btn.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ btn.title }}</v-list-item-title>
+              <v-list-item-subtitle>{{ btn.description }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-sheet>
       </v-col>
     </v-row>
     <v-row v-else>

@@ -82,6 +82,7 @@ module.exports = {
       },
       {
         test: /node_modules.*\.css$/,
+        exclude: [/(litegraph\.js)/],
         sideEffects: true,
         use: [
           'style-loader',
@@ -92,6 +93,14 @@ module.exports = {
               selector: '.editor-ui',
             },
           },
+        ],
+      },
+      {
+        test: /node_modules.*(litegraph\.js).*\.css$/,
+        sideEffects: true,
+        use: [
+          'style-loader',
+          'css-loader',
         ],
       },
       {

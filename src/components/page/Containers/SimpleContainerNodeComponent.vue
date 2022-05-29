@@ -1,5 +1,5 @@
 <template>
-  <component-wrapper :componentId="model.id" :isChildrenHover="isChildHover">
+  <component-wrapper :node="model" :componentId="model.id" :isChildrenHover="isChildHover">
     <component :is="model.tag" class="container">
       <template v-if="model.children.length">
         <component
@@ -7,7 +7,6 @@
           v-for="(child, index) in model.children"
           :key="`${model.name}-child-${index}`"
           v-bind="{ model: child }"
-          @click.native.prevent.stop="childrenClick(child)"
           @mouseenter.native="isChildHover = true"
           @mouseleave.native="isChildHover = false"
         />

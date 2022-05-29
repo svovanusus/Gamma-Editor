@@ -6,7 +6,6 @@ import SettingsPanelCreator from 'logic/model/settings/SettingsPanelCreator';
 export default class TextNodeSettingsPanelCreator extends SettingsPanelCreator<TextNode> {
   createPanel(model: TextNode): SettingsPanel<TextNode> {
     return SettingsPanel.create(model)
-      .addPart(new TextFieldSetting(model, 'name'))
       .addPart(new TextFieldSetting(model, 'text'))
       .addPart(new TextFieldSetting(model, 'notes'));
   }

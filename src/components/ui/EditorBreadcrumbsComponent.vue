@@ -1,24 +1,18 @@
 <template>
-  <v-sheet color="white" elevation="1">
-    <v-breadcrumbs
-      large
-      class="py-1"
-      :items="items"
-    >
-      <template v-slot:item="{ item }">
-        <v-breadcrumbs-item v-if="item.isHome">
-          <v-icon class="py-1">mdi-home</v-icon>
-        </v-breadcrumbs-item>
-        <v-breadcrumbs-item
-          v-else
-          :href="item.href"
-          @click.prevent.stop="() => itemClick(item.node)"
-        >
-          {{ item.text }}
-        </v-breadcrumbs-item>
-      </template>
-    </v-breadcrumbs>
-  </v-sheet>
+  <v-breadcrumbs large :items="items" class="pa-0">
+    <template v-slot:item="{ item }">
+      <v-breadcrumbs-item v-if="item.isHome">
+        <v-icon class="py-1">mdi-home</v-icon>
+      </v-breadcrumbs-item>
+      <v-breadcrumbs-item
+        v-else
+        :href="item.href"
+        @click.prevent.stop="() => itemClick(item.node)"
+      >
+        {{ item.text }}
+      </v-breadcrumbs-item>
+    </template>
+  </v-breadcrumbs>
 </template>
 
 <script lang="ts">

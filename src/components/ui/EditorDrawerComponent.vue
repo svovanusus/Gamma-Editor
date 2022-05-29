@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app permanent width="300">
+  <v-navigation-drawer v-model="drawerState" app width="300">
     <v-tabs
       slot="prepend"
       v-model="tab"
@@ -37,11 +37,15 @@
 </style>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, VModel } from 'vue-property-decorator';
 
-import SettingsPanelComponent from 'components/ui/settings/SettingsPanelComponent.vue';
-import DomTreeComponent from 'components/ui/dom/DomTreeComponent.vue';
-import AddNodePanelComponent from 'components/ui/add-node/AddNodePanelComponent.vue';
+import SettingsPanelComponent from 'components/ui/drawer-tabs/settings/SettingsPanelComponent.vue';
+import DomTreeComponent from 'components/ui/drawer-tabs/dom/DomTreeComponent.vue';
+import AddNodePanelComponent from 'components/ui/drawer-tabs/add-node/AddNodePanelComponent.vue';
+import CommonPanelComponent from 'components/ui/drawer-tabs/common/CommonPanelComponent.vue';
+import PagesPanelComponent from 'components/ui/drawer-tabs/pages/PagesPanelComponent.vue';
+import NodesPannelComponent from 'components/ui/drawer-tabs/nodes/NodesPannelComponent.vue';
+
 import { StoreState, StoreTypes } from 'store';
 import DrawerTabEnum, { TabsDetails } from 'model/DrawerTabs';
 
@@ -57,9 +61,14 @@ interface TabDesc {
     SettingsPanelComponent,
     DomTreeComponent,
     AddNodePanelComponent,
+    CommonPanelComponent,
+    PagesPanelComponent,
+    NodesPannelComponent,
   },
 })
 export default class EditorDrawerComponent extends Vue {
+  @VModel({ default: true }) public readonly drawerState!: boolean;
+
   public readonly state: StoreState = this.$store.state;
 
   public get tab(): DrawerTabEnum {

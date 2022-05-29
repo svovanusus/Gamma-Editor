@@ -1,5 +1,5 @@
 <template>
-  <component-wrapper :componentId="model.id">
+  <component-wrapper :node="model" :componentId="model.id">
     <a :href="model.action" class="btn">{{ model.text }}</a>
   </component-wrapper>
 </template>

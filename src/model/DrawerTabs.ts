@@ -1,7 +1,7 @@
 enum DrawerTabEnum {
-  DOM = 'tab-dom',
+  COMMON = 'tab-common',
   PROPS = 'tab-props',
-  ADDING = 'tab-adding',
+  DOM = 'tab-dom',
 }
 
 export default DrawerTabEnum;
@@ -12,7 +12,7 @@ interface TabDetails {
 }
 
 export const TabsDetails = new Map<DrawerTabEnum, TabDetails>([
-  [DrawerTabEnum.DOM, { icon: 'mdi-file-tree', component: 'DomTreeComponent' }],
+  [DrawerTabEnum.COMMON, { icon: 'mdi-menu', component: 'CommonPanelComponent' }],
   [DrawerTabEnum.PROPS, { icon: 'mdi-cog', component: 'SettingsPanelComponent' }],
-  [DrawerTabEnum.ADDING, { icon: 'mdi-view-grid-plus', component: 'AddNodePanelComponent' }],
+  [DrawerTabEnum.DOM, { icon: 'mdi-file-tree', component: 'NodesPannelComponent' }],
 ]);

@@ -3,12 +3,13 @@ import NodePropsSavingHelper from 'logic/model/NodePropsSavingHelper';
 import NodeTypeEnum from 'logic/model/NodeTypeEnum';
 import ContainerNodeBase from 'logic/model/page/ContainerNodeBase';
 import INodeModel from 'model/INodeModel';
+import ContainerTagType from '../ContainerTagType';
 
 export default class SimpleContainerNode
   extends ContainerNodeBase
   implements ISavable<SimpleContainerNode>
 {
-  public tag: string = __defaults.tag;
+  public tag: ContainerTagType = __defaults.tag;
 
   public constructor() {
     super('SimpleContainerNodeComponent', NodeTypeEnum.SimpleContainerNodeType);
@@ -28,11 +29,11 @@ export default class SimpleContainerNode
 
   public load(obj: INodeModel): SimpleContainerNode {
     super.load(obj);
-    this.tag = NodePropsSavingHelper.get(obj.tag, __defaults.tag) as string;
+    this.tag = NodePropsSavingHelper.get(obj.tag, __defaults.tag) as ContainerTagType;
     return this;
   }
 }
 
 const __defaults = {
-  tag: 'div',
+  tag: ContainerTagType.Div,
 };

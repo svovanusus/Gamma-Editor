@@ -2,12 +2,13 @@ import ColumnsContainerNode from 'logic/model/page/Containers/ColumnsContainerNo
 import TextFieldSetting from 'logic/model/settings/parts/TextFieldSetting';
 import SettingsPanel from 'logic/model/settings/SettingsPanel';
 import SettingsPanelCreator from 'logic/model/settings/SettingsPanelCreator';
+import BackgroundSettings from '../parts/BackgroundSettings';
 
 export default class ColumnsContainerNodeSettingsPanelCreator extends SettingsPanelCreator<ColumnsContainerNode> {
   createPanel(model: ColumnsContainerNode): SettingsPanel<ColumnsContainerNode> {
     return SettingsPanel.create(model)
-      .addPart(new TextFieldSetting(model, 'name'))
       .addPart(new TextFieldSetting(model, 'gap'))
+      .addPart(new BackgroundSettings(model, 'backgound', 'Background'))
       .addPart(new TextFieldSetting(model, 'notes'));
   }
 }

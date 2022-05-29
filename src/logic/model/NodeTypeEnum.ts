@@ -4,6 +4,7 @@ const enum NodeTypeEnum {
   ButtonNodeType = 2,
   SimpleContainerNodeType = 3,
   ColumnsContainerNodeType = 4,
+  ImageNodeType = 5,
 };
 
 export default NodeTypeEnum;

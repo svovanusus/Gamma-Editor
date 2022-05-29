@@ -4,13 +4,13 @@
       :is="action.component"
       v-for="action in actionsPanel.actions"
       :key="action.name"
-      :nodeAction="action"
+      :action="action"
     />
   </v-toolbar>
 </template>
 
 <script lang="ts">
-import { StoreState, StoreTypes } from 'store';
+import { StoreState } from 'store';
 import { Component, Vue } from 'vue-property-decorator';
 import NodeActionsPanelFactory from 'logic/model/actions/NodeActionsPanelFactory';
 import NodeActionsPanel from 'logic/model/actions/NodeActionsPanel';
