@@ -1,11 +1,5 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12">
-        <v-treeview :active.sync="active" :items="[state.document]" activatable open-all dense transition />
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-treeview :active.sync="active" :items="[state.currentDocument]" activatable open-all dense transition />
 </template>
 
 <script lang="ts">
@@ -27,7 +21,7 @@ export default class DomTreeComponent extends Vue {
   }
 
   public set active(val: string[]) {
-    var found = this.findFunc([this.state.document], val[0]);
+    var found = this.findFunc([this.state.currentDocument], val[0]);
     this.$store.dispatch(StoreTypes.actions.SELECT_NODE, { node: found, isPropsOpen: false });
   }
 

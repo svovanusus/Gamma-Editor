@@ -1,5 +1,5 @@
 <template>
-  <component-wrapper :componentId="model.id" :isChildrenHover="isChildHover">
+  <component-wrapper :node="model" :componentId="model.id" :isChildrenHover="isChildHover">
     <div class="columns" :style="styles">
       <template v-if="model.children.length">
         <component
@@ -7,9 +7,8 @@
           v-for="child in model.children"
           :key="`column-${child.id}`"
           :model="child"
-          @click.native.prevent.stop="childrenClick(child)"
-          @mouseenter="isChildHover = true"
-          @mouseleave="isChildHover = false"
+          @mouseenter.native="isChildHover = true"
+          @mouseleave.native="isChildHover = false"
         />
       </template>
       <div v-else class="node-placeholder" @click.prevent.stop="() => placeholderClick()">No columns yet</div>

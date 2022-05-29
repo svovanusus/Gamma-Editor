@@ -2,8 +2,8 @@ export default class ServiceLocator {
   private constructor() {}
 
   public static getInstance(): ServiceLocator {
-    if (!this.instance) this.instance = new ServiceLocator();
-    return this.instance;
+    if (!ServiceLocator.instance) ServiceLocator.instance = new ServiceLocator();
+    return ServiceLocator.instance;
   }
 
   public addService<T>(id: string, resolver: () => T) {

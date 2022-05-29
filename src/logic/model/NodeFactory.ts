@@ -7,6 +7,7 @@ import PageDocument from 'logic/model/page/PageDocument';
 import INodeFactory from 'logic/model/INodeFactory';
 import IContainerNode from 'logic/model/page/IContainerNode';
 import ColumnsContainerNode from 'logic/model/page/Containers/ColumnsContainerNode';
+import ImageNode from 'logic/model/page/Nodes/ImageNode';
 
 interface NodeConstructor {
   new (): NodeBase;
@@ -23,6 +24,7 @@ export default class NodeFactory implements INodeFactory {
     this._nodeMapTable[NodeTypeEnum.ButtonNodeType] = ButtonNode;
     this._nodeMapTable[NodeTypeEnum.SimpleContainerNodeType] = SimpleContainerNode;
     this._nodeMapTable[NodeTypeEnum.ColumnsContainerNodeType] = ColumnsContainerNode;
+    this._nodeMapTable[NodeTypeEnum.ImageNodeType] = ImageNode;
   }
 
   public static getInstance(): NodeFactory {

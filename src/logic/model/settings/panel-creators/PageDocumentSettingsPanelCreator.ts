@@ -6,7 +6,6 @@ import SettingsPanelCreator from 'logic/model/settings/SettingsPanelCreator';
 export default class PageDocumentSettingsPanelCreator extends SettingsPanelCreator<PageDocument> {
   public createPanel(model: PageDocument): SettingsPanel<PageDocument> {
     return SettingsPanel.create(model)
-      .addPart(new TextFieldSetting(model, 'name'))
       .addPart(new TextFieldSetting(model, 'title'))
       .addPart(new TextFieldSetting(model, 'notes'));
   }

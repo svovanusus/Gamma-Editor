@@ -4,9 +4,10 @@ import ButtonNodeSettingsPanelCreator from 'logic/model/settings/panel-creators/
 import PageDocumentSettingsPanelCreator from 'logic/model/settings/panel-creators/PageDocumentSettingsPanelCreator';
 import SimpleContainerNodeSettingsPanelCreator from 'logic/model/settings/panel-creators/SimpleContainerNodeSettingsPanelCreator';
 import TextNodeSettingsPanelCreator from 'logic/model/settings/panel-creators/TextNodeSettingsPanelCreator';
+import ColumnsContainerNodeSettingsPanelCreator from 'logic/model/settings/panel-creators/ColumnsContainerNodeSettingsPanelCreator';
+import ImageNodeSettingsPanelCreator from 'logic/model/settings/panel-creators/ImageNodeSettingsPanelCreator';
 import SettingsPanel from 'logic/model/settings/SettingsPanel';
 import SettingsPanelCreator from 'logic/model/settings/SettingsPanelCreator';
-import ColumnsContainerNodeSettingsPanelCreator from 'logic/model/settings/panel-creators/ColumnsContainerNodeSettingsPanelCreator';
 
 export default class SettingsPanelFactory {
   private static _instance: SettingsPanelFactory | null = null;
@@ -30,6 +31,9 @@ export default class SettingsPanelFactory {
 
     this.settingsPanelCreatorTable[NodeTypeEnum.ColumnsContainerNodeType] =
       new ColumnsContainerNodeSettingsPanelCreator();
+
+    this.settingsPanelCreatorTable[NodeTypeEnum.ImageNodeType] =
+      new ImageNodeSettingsPanelCreator();
   }
 
   public static getInstance(): SettingsPanelFactory {

@@ -5,6 +5,7 @@ import IContainerNode from 'logic/model/page/IContainerNode';
 import NodeBase from 'logic/model/page/NodeBase';
 import INodeModel from 'model/INodeModel';
 import ServiceLocator from 'logic/services/ServiceLocator';
+import BackgroundSettingsModel, { SavedBackgroundSettings } from 'logic/model/page/settings/BackgroundSettingsModel';
 
 export default abstract class ContainerNodeBase
   extends NodeBase
@@ -13,6 +14,8 @@ export default abstract class ContainerNodeBase
   private _nodeFactory: INodeFactory;
 
   public children: NodeBase[] = [];
+
+  public backgound: BackgroundSettingsModel;
 
   protected constructor(componentName: string, type: NodeTypeEnum) {
     super(componentName, type);
@@ -23,6 +26,7 @@ export default abstract class ContainerNodeBase
     const res = super.save();
     return {
       children: this.children.map((node) => node.save()),
+      background: this.backgound.save(),
       ...res,
     };
   }
@@ -37,6 +41,7 @@ export default abstract class ContainerNodeBase
           return node?.load(child);
         })
         .filter((x) => x);
+      this.backgound = new BackgroundSettingsModel().load((obj.background ?? {}) as SavedBackgroundSettings);
     }
 
     return this;

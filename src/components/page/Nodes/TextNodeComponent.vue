@@ -1,5 +1,5 @@
 <template>
-  <component-wrapper :componentId="model.id">
+  <component-wrapper :node="model" :componentId="model.id">
     <p>{{ model.text }}</p>
   </component-wrapper>
 </template>

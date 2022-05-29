@@ -5,11 +5,16 @@ import ButtonNodeComponent from 'components/page/Nodes/ButtonNodeComponent.vue';
 import TextNodeComponent from 'components/page/Nodes/TextNodeComponent.vue';
 import PageDocumentComponent from 'components/page/PageDocumentComponent.vue';
 import ColumnsContainerNodeComponent from 'components/page/Containers/ColumnsContainerNodeComponent.vue';
+import ImageNodeComponent from 'components/page/Nodes/ImageNodeComponent.vue';
 
-import TextFieldSettingsComponent from 'components/ui/settings/parts/TextFieldSettingsComponent.vue';
-import SelectSettingComponent from 'components/ui/settings/parts/SelectSettingComponent.vue';
+import TextFieldSettingsComponent from 'components/ui/drawer-tabs/settings/parts/TextFieldSettingsComponent.vue';
+import SelectSettingComponent from 'components/ui/drawer-tabs/settings/parts/SelectSettingComponent.vue';
+import ResourceSelectorSettingComponent from 'components/ui/drawer-tabs/settings/parts/ResourceSelectorSettingComponent.vue';
+import BackgroundSettingsComponent from 'components/ui/drawer-tabs/settings/parts/BackgroundSettingsComponent.vue';
 
 import NodeActionButtonComponent from 'components/ui/actions/node-actions/NodeActionButtonComponent.vue';
+import LabelNodeActionComponent from 'components/ui/actions/node-actions/LabelNodeActionComponent.vue';
+import SelectResourceNodeActionComponent from 'components/ui/actions/node-actions/SelectResourceNodeActionComponent.vue';
 
 interface Options {}
 
@@ -24,12 +29,17 @@ export default <PluginObject<Options>><unknown>{
     app.component(TextNodeComponent.name, TextNodeComponent);
     app.component(PageDocumentComponent.name, PageDocumentComponent);
     app.component(ColumnsContainerNodeComponent.name, ColumnsContainerNodeComponent);
+    app.component(ImageNodeComponent.name, ImageNodeComponent);
 
     // SETTINGS PARTS
     app.component(TextFieldSettingsComponent.name, TextFieldSettingsComponent);
     app.component(SelectSettingComponent.name, SelectSettingComponent);
+    app.component(ResourceSelectorSettingComponent.name, ResourceSelectorSettingComponent);
+    app.component(BackgroundSettingsComponent.name, BackgroundSettingsComponent);
 
     // NODES ACTIONS
     app.component(NodeActionButtonComponent.name, NodeActionButtonComponent);
+    app.component(LabelNodeActionComponent.name, LabelNodeActionComponent);
+    app.component(SelectResourceNodeActionComponent.name, SelectResourceNodeActionComponent);
   },
 };
