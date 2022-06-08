@@ -1,5 +1,6 @@
-import { Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
+@Component({})
 export default class SettingComponentBase<TSetting, TModel> extends Vue {
   @Prop({ required: true }) public readonly setting!: TSetting;
 

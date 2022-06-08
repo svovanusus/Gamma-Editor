@@ -67,7 +67,7 @@ export default class SettingsPanelComponent extends Vue {
   }
 
   public get parts() {
-    return this.panel?.parts ?? []
+    return this.panel?.parts.filter(x => x.isVisible) ?? []
   }
 
   public deselectNode(): void {

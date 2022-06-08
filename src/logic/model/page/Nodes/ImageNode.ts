@@ -32,7 +32,7 @@ export default class ImageNode extends NodeBase implements ISavable<ImageNode> {
     if (this.altText.trim()) return this.altText.trim();
 
     const resource = this.mediaManagerService.getResource(this.resourceUid);
-    return resource.defaultAlt || '';
+    return resource?.defaultAlt || '';
   }
 
   public save(): INodeModel {

@@ -6,10 +6,13 @@ import ContainerNodeBase from 'logic/model/page/ContainerNodeBase';
 import PageDocument from 'logic/model/page/PageDocument';
 import DrawerTabEnum from 'model/DrawerTabs';
 import EditorModuleEnum from 'model/EditorModules';
+import NodeFactory from 'logic/model/NodeFactory';
+import NodeTypeEnum from 'logic/model/NodeTypeEnum';
 
 Vue.use(Vuex);
 
 export type StoreState = {
+  siteId: string;
   documents: PageDocument[];
   currentDocument: PageDocument | null;
   currentEditorModule: EditorModuleEnum;
@@ -22,18 +25,24 @@ export type StoreState = {
 export const StoreTypes = {
   getters: {},
   mutations: {
+    ADD_DOCUMENT: 'ADD_DOCUMENT',
     SET_DOCUMENT: 'SET_DOCUMENT',
+    REMOVE_DOCUMENT: 'REMOVE_DOCUMENT',
     SET_CURRENT_NODE: 'SET_CURRENT_NODE',
     SET_DRAWER_ACTIVE_TAB: 'SET_DRAWER_ACTIVE_TAB',
     SET_NODES_PANEL_ACTIVE_SECTION_NAME: 'SET_NODES_PANEL_ACTIVE_SECTION_NAME',
     SET_DRAWER_STATE: 'SET_DRAWER_STATE',
   },
   actions: {
+    CREATE_DOCUMENT: 'CREATE_DOCUMENT',
+    SELECT_DOCUMENT: 'SELECT_DOCUMENT',
+    DELETE_DOCUMENT: 'DELETE_DOCUMENT',
     SELECT_NODE: 'SELECT_NODE',
   },
 };
 
 const state: StoreState = {
+  siteId: '0',
   documents: [],
   currentDocument: null,
   currentEditorModule: EditorModuleEnum.PageEditor,
@@ -46,8 +55,24 @@ const state: StoreState = {
 const getters: GetterTree<StoreState, StoreState> = {};
 
 const mutations: MutationTree<StoreState> = {
-  [StoreTypes.mutations.SET_DOCUMENT]: (state, document: PageDocument | null) =>
-    (state.currentDocument = document),
+  [StoreTypes.mutations.ADD_DOCUMENT]: (state, document: PageDocument) => {
+    if (state.documents.some(x => x.id === document.id)) return;
+    state.documents.push(document);
+  },
+
+  [StoreTypes.mutations.SET_DOCUMENT]: (state, documentId: string | null) => {
+    state.documents.forEach(x => x.stylesheet.deactivate());
+    const document = state.documents.find(x => x.id === documentId) ?? null;
+    state.currentDocument = document;
+    state.currentDocument?.stylesheet.activate();
+  },
+
+  [StoreTypes.mutations.REMOVE_DOCUMENT]: (state, documentId: string) => {
+    const index = state.documents.findIndex(x => x.id === documentId);
+    if (index < 0) return;
+
+    state.documents.splice(index, 1);
+  },
 
   [StoreTypes.mutations.SET_CURRENT_NODE]: (state, currentNode: NodeBase | null) => {
     const newNode = findNode([ state.currentDocument ], currentNode?.id);
@@ -65,6 +90,33 @@ const mutations: MutationTree<StoreState> = {
 };
 
 const actions: ActionTree<StoreState, StoreState> = {
+  [StoreTypes.actions.CREATE_DOCUMENT]: (context) => {
+    let id = 0;
+    let documentId = '';
+    do {
+      documentId = `id${++id}`;
+    } while(context.state.documents.some(x => x.id === documentId));
+
+    const _nodeFactory = NodeFactory.getInstance();
+    const document = _nodeFactory.createNodeByType(NodeTypeEnum.PageDocumentNodeType).load({
+      type: NodeTypeEnum.PageDocumentNodeType,
+      id: documentId,
+      title: `Page #${id}`,
+      children: [],
+    });
+
+    context.commit(StoreTypes.mutations.ADD_DOCUMENT, document);
+  },
+
+  [StoreTypes.actions.SELECT_DOCUMENT]: (context, documentId: string | null) => {
+    context.commit(StoreTypes.mutations.SET_DOCUMENT, documentId);
+    context.commit(StoreTypes.mutations.SET_CURRENT_NODE, null);
+  },
+
+  [StoreTypes.actions.DELETE_DOCUMENT]: (context, documentId: string) => {
+    context.commit(StoreTypes.mutations.REMOVE_DOCUMENT, documentId);
+  },
+
   [StoreTypes.actions.SELECT_NODE]: (context, options: { node: NodeBase | null, isPropsOpen?: boolean }) => {
     options.isPropsOpen = options.isPropsOpen ?? true;
     context.commit(StoreTypes.mutations.SET_CURRENT_NODE, options.node);

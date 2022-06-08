@@ -3,6 +3,7 @@ import BackgroundSize, { SavedBackgroundSize } from 'logic/model/page/settings/B
 import BackgroundPosition, { SavedBackgroundPosition } from 'logic/model/page/settings/BackgroundPosition';
 import ISavable from 'logic/model/ISavable';
 import ISettingsModel from 'model/ISettingsModel';
+import _default from 'vuex';
 
 export interface SavedBackgroundSettings extends ISettingsModel {
   type: BackgroundType;
@@ -14,12 +15,12 @@ export interface SavedBackgroundSettings extends ISettingsModel {
 }
 
 export default class BackgroundSettingsModel implements ISavable<BackgroundSettingsModel, SavedBackgroundSettings> {
-  public type: BackgroundType;
-  public color: string;
-  public resourceUid: string;
-  public transparency: number;
-  public size: BackgroundSize;
-  public position: BackgroundPosition;
+  public type: BackgroundType = __defaults.type;
+  public color: string = __defaults.color;
+  public resourceUid: string = __defaults.resourceUid;
+  public transparency: number = __defaults.transparency;
+  public size: BackgroundSize = __defaults.size.clone();
+  public position: BackgroundPosition = __defaults.position.clone();
 
   save(): SavedBackgroundSettings {
     return {
@@ -33,12 +34,21 @@ export default class BackgroundSettingsModel implements ISavable<BackgroundSetti
   }
 
   load(obj: SavedBackgroundSettings): BackgroundSettingsModel {
-    this.type = obj.type ?? BackgroundType.None;
-    this.color = obj.color ?? '#FFFFFF';
-    this.resourceUid = obj.resourceUid ?? null;
-    this.transparency = obj.transparency ?? 0;
-    this.size = new BackgroundSize().load(obj.size ?? ({} as SavedBackgroundSize));
-    this.position = new BackgroundPosition().load(obj.position ?? ({} as SavedBackgroundPosition));
+    this.type = obj.type ?? __defaults.type;
+    this.color = obj.color ?? __defaults.color;
+    this.resourceUid = obj.resourceUid ?? __defaults.resourceUid;
+    this.transparency = obj.transparency ?? __defaults.transparency;
+    this.size = obj.size ? new BackgroundSize().load(obj.size) : __defaults.size.clone();
+    this.position = obj.position ? new BackgroundPosition().load(obj.position) : __defaults.position.clone();
     return this;
   }
 }
+
+const __defaults = {
+  type: BackgroundType.None,
+  color: '#FFFFFF',
+  resourceUid: null,
+  transparency: 0,
+  size: new BackgroundSize(),
+  position: new BackgroundPosition(),
+};

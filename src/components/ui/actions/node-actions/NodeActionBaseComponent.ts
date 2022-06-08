@@ -1,6 +1,7 @@
 import NodeActionBase from 'logic/model/actions/node-actions/NodeActionBase';
-import { Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
+@Component({})
 export default class NodeActionBaseComponent<TNodeAction extends NodeActionBase> extends Vue {
   @Prop({ required: true }) public readonly action!: TNodeAction;
 }

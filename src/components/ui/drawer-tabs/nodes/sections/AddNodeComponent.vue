@@ -66,7 +66,6 @@ export default class AddNodeComponent extends Vue {
     if (!container) return;
 
     const node = this.nodeFactory.createNodeByType(type, container);
-    node.id = `0-${Math.random()}`;
     node.name = node.defaultName;
     container.children.push(node);
 

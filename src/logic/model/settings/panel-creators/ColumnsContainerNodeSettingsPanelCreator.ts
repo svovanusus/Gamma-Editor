@@ -8,7 +8,7 @@ export default class ColumnsContainerNodeSettingsPanelCreator extends SettingsPa
   createPanel(model: ColumnsContainerNode): SettingsPanel<ColumnsContainerNode> {
     return SettingsPanel.create(model)
       .addPart(new TextFieldSetting(model, 'gap'))
-      .addPart(new BackgroundSettings(model, 'backgound', 'Background'))
+      .addPart(new BackgroundSettings(model, 'background', 'Background'))
       .addPart(new TextFieldSetting(model, 'notes'));
   }
 }

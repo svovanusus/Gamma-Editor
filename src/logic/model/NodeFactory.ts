@@ -38,6 +38,8 @@ export default class NodeFactory implements INodeFactory {
     if (constructor) {
       const node = new constructor() as T;
       node.parent = parent;
+      const parentId = parent ? `${parent.document.id}-` : 'id';
+      node.id = `${parentId}${Math.random().toString(27).slice(2)}`;
       return node;
     }
 

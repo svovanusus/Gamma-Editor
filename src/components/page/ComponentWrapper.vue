@@ -1,5 +1,5 @@
 <template>
-  <div class="node">
+  <div class="node" :id="node.id">
     <div class="node-inner" @click.prevent.stop="onClick()">
       <slot>
         <div class="node-placeholder">Empty Node</div>

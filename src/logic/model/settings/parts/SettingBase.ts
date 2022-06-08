@@ -1,11 +1,15 @@
 import NodeBase from 'logic/model/page/NodeBase';
 
+type VisibilityFunction<TModel> = (model: TModel) => boolean;
+
 export default class SettingBase<TModel extends NodeBase, TField = unknown> {
   public readonly componentName: string;
 
   protected readonly model: TModel;
   protected readonly fieldName: keyof TModel;
   protected readonly label?: string;
+
+  private visibilityFunction: VisibilityFunction<TModel>;
 
   protected constructor(
     componentName: string,
@@ -17,6 +21,7 @@ export default class SettingBase<TModel extends NodeBase, TField = unknown> {
     this.model = model;
     this.fieldName = fieldName;
     this.label = label;
+    this.visibilityFunction = () => true;
   }
 
   public get value(): TField {
@@ -39,5 +44,15 @@ export default class SettingBase<TModel extends NodeBase, TField = unknown> {
         .toLowerCase()
         .replace(/\b\w/g, (c) => c.toUpperCase())
     );
+  }
+
+  public get isVisible(): boolean {
+    if (!this.visibilityFunction) return true;
+    return this.visibilityFunction(this.model);
+  }
+
+  public withVisibilityFunction(func: VisibilityFunction<TModel>): SettingBase<TModel, TField> {
+    this.visibilityFunction = func;
+    return this;
   }
 }

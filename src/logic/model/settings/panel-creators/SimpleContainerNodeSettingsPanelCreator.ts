@@ -11,7 +11,7 @@ export default class SimpleContainerNodeSettingsPanelCreator extends SettingsPan
   createPanel(model: SimpleContainerNode): SettingsPanel<SimpleContainerNode> {
     return SettingsPanel.create(model)
       .addPart(new SelectSetting(model, 'tag', 'Tag', SelectOptionsHelper.generateSelectOptionsForEnum<ContainerTagType>(ContainerTagType)))
-      .addPart(new BackgroundSettings(model, 'backgound', 'Background'))
+      .addPart(new BackgroundSettings(model, 'background', 'Background'))
       .addPart(new TextFieldSetting(model, 'notes'));
   }
 }

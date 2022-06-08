@@ -4,6 +4,7 @@ import NodeTypeEnum from 'logic/model/NodeTypeEnum';
 import INode from 'logic/model/page/INode';
 import INodeModel from 'model/INodeModel';
 import IContainerNode from 'logic/model/page/IContainerNode';
+import IPageDocument from './IPageDocument';
 
 export default abstract class NodeBase implements INode, ISavable<NodeBase> {
   public readonly type: NodeTypeEnum;
@@ -20,6 +21,10 @@ export default abstract class NodeBase implements INode, ISavable<NodeBase> {
   }
 
   public abstract get defaultName(): string;
+
+  public get document(): IPageDocument {
+    return this.parent?.document;
+  }
 
   public save(): INodeModel {
     return {

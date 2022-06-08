@@ -15,7 +15,7 @@ export default abstract class ContainerNodeBase
 
   public children: NodeBase[] = [];
 
-  public backgound: BackgroundSettingsModel;
+  public background: BackgroundSettingsModel = new BackgroundSettingsModel();
 
   protected constructor(componentName: string, type: NodeTypeEnum) {
     super(componentName, type);
@@ -26,7 +26,7 @@ export default abstract class ContainerNodeBase
     const res = super.save();
     return {
       children: this.children.map((node) => node.save()),
-      background: this.backgound.save(),
+      background: this.background.save(),
       ...res,
     };
   }
@@ -41,7 +41,7 @@ export default abstract class ContainerNodeBase
           return node?.load(child);
         })
         .filter((x) => x);
-      this.backgound = new BackgroundSettingsModel().load((obj.background ?? {}) as SavedBackgroundSettings);
+      this.background = new BackgroundSettingsModel().load((obj.background ?? {}) as SavedBackgroundSettings);
     }
 
     return this;

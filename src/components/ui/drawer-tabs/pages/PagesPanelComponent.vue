@@ -1,9 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12">
-        <p>This is PAGES</p>
-      </v-col>
+      <p>TEST</p>
     </v-row>
   </v-container>
 </template>
@@ -15,7 +13,5 @@ import { Component, Vue } from 'vue-property-decorator';
   name: 'PagesPanelComponent',
   components: {},
 })
-export default class PagesPanelComponent extends Vue {
-
-}
+export default class PagesPanelComponent extends Vue {}
 </script>
