@@ -17,7 +17,7 @@ Vue.use(ComponentsLoader);
 
 const vuetify = new Vuetify({});
 
-var app = new Vue({
+const app = new Vue({
   el: '#app',
   render: (h) => h(App),
   vuetify,
