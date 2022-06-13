@@ -104,13 +104,13 @@ import LitegraphEditorComponent from 'components/ui/litegraph/LitegraphEditorCom
 import MediaManagerComponent from 'components/ui/media/MediaManagerComponent.vue';
 
 import NodeFactory from 'logic/model/NodeFactory';
-import NodeBase from 'logic/model/page/NodeBase';
 import { StoreState, StoreTypes } from 'store';
 import PageLoader from 'store/page-loader';
 import PageDocument from 'logic/model/page/PageDocument';
 import EditorModuleEnum from 'model/EditorModules';
 import NodeTypeEnum from 'logic/model/NodeTypeEnum';
 import EditorMode from 'model/EditorMode';
+import INodeModel from 'model/INodeModel';
 
 @Component({
   name: 'App',
@@ -160,15 +160,25 @@ export default class App extends Vue {
   public mounted() {
     const _nodeFactory = NodeFactory.getInstance();
 
-    this.$store.commit(
-      StoreTypes.mutations.ADD_DOCUMENT,
-      _nodeFactory.createNodeByType(NodeTypeEnum.PageDocumentNodeType)?.load(PageLoader.getExample1()) ?? ({} as NodeBase)
-    );
+    const match = window.location.pathname.match(/\/site\/(\d)/);
+    const id = match ? parseInt(match[1]) : 0;
 
-    this.$store.commit(
-      StoreTypes.mutations.ADD_DOCUMENT,
-      _nodeFactory.createNodeByType(NodeTypeEnum.PageDocumentNodeType)?.load(PageLoader.getExample2()) ?? ({} as NodeBase)
-    );
+    if (id === 1) {
+      this.$store.commit(
+        StoreTypes.mutations.ADD_DOCUMENT,
+        _nodeFactory.createNodeByType(NodeTypeEnum.PageDocumentNodeType)?.load(PageLoader.getExample1()) ?? ({} as INodeModel)
+      );
+    } else if (id === 2) {
+      this.$store.commit(
+        StoreTypes.mutations.ADD_DOCUMENT,
+        _nodeFactory.createNodeByType(NodeTypeEnum.PageDocumentNodeType)?.load(PageLoader.getExample2()) ?? ({} as INodeModel)
+      );
+    } else {
+      this.$store.commit(
+        StoreTypes.mutations.ADD_DOCUMENT,
+        _nodeFactory.createNodeByType(NodeTypeEnum.PageDocumentNodeType)?.load({ type: 0, id: `id${id}-0` } as INodeModel)
+      );
+    }
 
     this.$store.commit(StoreTypes.mutations.SET_DOCUMENT, this.state.documents[0].id);
 
