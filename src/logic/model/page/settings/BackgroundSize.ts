@@ -33,6 +33,18 @@ export default class BackgroundSize implements ISavable<BackgroundSize, SavedBac
   clone(): BackgroundSize {
     return new BackgroundSize().load(this.save());
   }
+
+  toString(): string {
+    switch(this.type) {
+      case BackgroundSizeType.Contain:
+      case BackgroundSizeType.Cover:
+        return this.type;
+      case BackgroundSizeType.Fixed:
+        return `${this.width.toString()} ${this.height.toString()}`;
+    }
+
+    return 'inherit';
+  }
 }
 
 const __defaults = {

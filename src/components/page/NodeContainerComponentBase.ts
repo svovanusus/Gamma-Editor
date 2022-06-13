@@ -7,6 +7,7 @@ import { StoreTypes } from 'store';
 import BackgroundType from 'logic/model/page/settings/BackgroundType';
 import IMediaManagerService from 'logic/services/IMediaManagerService';
 import ServiceLocator from 'logic/services/ServiceLocator';
+import BackgroundSizeType from 'logic/model/page/settings/BackgroundSizeType';
 
 @Component({})
 export default class NodeContainerComponentBase<TNode extends ContainerNodeBase> extends NodeComponentBase<TNode> {
@@ -33,14 +34,38 @@ export default class NodeContainerComponentBase<TNode extends ContainerNodeBase>
     this.applyNodeStylesBase(stylesheet);
 
     if (this.model.background.type !== BackgroundType.None) {
-      const rule = stylesheet.forRule({ id: this.model.id });
+      const rule = this.model.background.transparency === 0
+        ? stylesheet.forRule({ id: this.model.id })
+        : stylesheet.forRule({ id: this.model.id, pseudoElement: 'before' });
+
+      if (this.model.background.transparency !== 0) {
+        stylesheet.forRule({ id: this.model.id })
+          .setProperty('position', 'relative');
+
+        rule.setProperty('content', '""')
+          .setProperty('position', 'absolute')
+          .setProperty('top', '0')
+          .setProperty('left', '0')
+          .setProperty('width', '100%')
+          .setProperty('height', '100%');
+      }
 
       if (this.model.background.type === BackgroundType.Image) {
         rule.setProperty('background-image', `url(${this.getResourceUrl(this.model.background.resourceUid)})`);
+
+        if (this.model.background.size.type !== BackgroundSizeType.Default) {
+          rule.setProperty('background-size', this.model.background.size.toString());
+        }
+
+        rule.setProperty('background-position', this.model.background.position.toString());
       }
 
       if (this.model.background.type === BackgroundType.Color) {
         rule.setProperty('background-color', this.model.background.color);
+      }
+
+      if (this.model.background.transparency > 0) {
+        rule.setProperty('opacity', ((100 - this.model.background.transparency) / 100).toFixed(2));
       }
     }
   }

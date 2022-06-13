@@ -5,6 +5,6 @@ export default class SelectOptionsHelper {
 
   public static generateSelectOptionsForEnum<TValue>(enum1: { [key: string]: string|number }): SelectOption<TValue>[] {
     return Object.keys(enum1).map(key =>
-      new SelectOption(key.replace(/(?<=[A-Z])(?=[A-Z][a-z])|(?<=[^A-Z])(?=[A-Z])|(?<=[A-Za-z])(?=[^A-Za-z])/g, x => ' ' + x).trim(), enum1[key] as unknown as TValue));
+      new SelectOption(key.replace(/(?<=[A-Z])(?=[A-Z][a-z])|(?<=[^A-Z])(?=[A-Z])|(?<=[A-Za-z])(?=[^A-Za-z])/g, x => ' ' + x).replace(/_/g, ' ').trim(), enum1[key] as unknown as TValue));
   }
 }

@@ -11,6 +11,10 @@ import TextFieldSettingsComponent from 'components/ui/drawer-tabs/settings/parts
 import SelectSettingComponent from 'components/ui/drawer-tabs/settings/parts/SelectSettingComponent.vue';
 import ResourceSelectorSettingComponent from 'components/ui/drawer-tabs/settings/parts/ResourceSelectorSettingComponent.vue';
 import BackgroundSettingsComponent from 'components/ui/drawer-tabs/settings/parts/BackgroundSettingsComponent.vue';
+import BoxSpacingSettingsComponent from 'components/ui/drawer-tabs/settings/parts/BoxSpacingSettingsComponent.vue';
+import ColorSettingComponent from 'components/ui/drawer-tabs/settings/parts/ColorSettingComponent.vue';
+import CssMeasureSettingComponent from 'components/ui/drawer-tabs/settings/parts/CssMeasureSettingComponent.vue';
+import SwitchSettingComponent from 'components/ui/drawer-tabs/settings/parts/SwitchSettingComponent.vue';
 
 import NodeActionButtonComponent from 'components/ui/actions/node-actions/NodeActionButtonComponent.vue';
 import LabelNodeActionComponent from 'components/ui/actions/node-actions/LabelNodeActionComponent.vue';
@@ -36,6 +40,10 @@ export default <PluginObject<Options>><unknown>{
     app.component(SelectSettingComponent.name, SelectSettingComponent);
     app.component(ResourceSelectorSettingComponent.name, ResourceSelectorSettingComponent);
     app.component(BackgroundSettingsComponent.name, BackgroundSettingsComponent);
+    app.component(BoxSpacingSettingsComponent.name, BoxSpacingSettingsComponent);
+    app.component(ColorSettingComponent.name, ColorSettingComponent);
+    app.component(CssMeasureSettingComponent.name, CssMeasureSettingComponent);
+    app.component(SwitchSettingComponent.name, SwitchSettingComponent);
 
     // NODES ACTIONS
     app.component(NodeActionButtonComponent.name, NodeActionButtonComponent);

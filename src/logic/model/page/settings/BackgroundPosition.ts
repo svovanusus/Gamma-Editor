@@ -29,6 +29,33 @@ export default class BackgroundPosition implements ISavable<BackgroundPosition, 
   clone(): BackgroundPosition {
     return new BackgroundPosition().load(this.save());
   }
+
+  toString(): string {
+    switch (this.type) {
+      case BackgroundPositionType.TopLeft:
+        return 'left top';
+      case BackgroundPositionType.TopCenter:
+        return 'center top';
+      case BackgroundPositionType.TopRight:
+        return 'right top';
+      case BackgroundPositionType.MiddleLeft:
+        return 'left center';
+      case BackgroundPositionType.Center:
+        return 'center';
+      case BackgroundPositionType.MiddleRight:
+        return 'right center';
+      case BackgroundPositionType.BottomLeft:
+        return 'left bottom';
+      case BackgroundPositionType.BottomCenter:
+        return 'center bottom';
+      case BackgroundPositionType.BottomRight:
+        return 'right bottom';
+      case BackgroundPositionType.Custom:
+        return this.offset.toString();
+    }
+
+    return 'inherit';
+  }
 }
 
 const __defaults = {

@@ -93,7 +93,7 @@
       </v-dialog>
     </template>
 
-    <v-slider label="Transparency" min="0" max="100" class="mt-3" thumb-label dense hide-details />
+    <v-slider v-model="model.transparency" label="Transparency" min="0" max="100" class="mt-3" thumb-label dense hide-details />
   </v-sheet>
 </template>
 

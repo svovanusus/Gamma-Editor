@@ -28,6 +28,10 @@ export default class OffsetSettingsModel implements ISavable<OffsetSettingsModel
   clone(): OffsetSettingsModel {
       return new OffsetSettingsModel().load(this.save());
   }
+
+  toString(): string {
+    return `${this.horizontal.toString()} ${this.vertical.toString()}`;
+  }
 }
 
 const __defaults = {

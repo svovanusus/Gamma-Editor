@@ -1,6 +1,7 @@
 <template>
   <div class="mx-2 my-4 settings-part">
-    <v-text-field v-model="model" outlined dense hide-details :label="setting.name" />
+    <v-text-field v-if="!setting.isMultiLine" v-model="model" outlined dense hide-details :label="setting.name" />
+    <v-textarea v-else v-model="model" outlined dense hide-details :label="setting.name" :rows="setting.rows" />
   </div>
 </template>
 

@@ -5,6 +5,7 @@ import NodeBase from 'logic/model/page/NodeBase';
 import INodeModel from 'model/INodeModel';
 import ButtonActionTypeEnum from '../settings/ButtonActionTypeEnum';
 import ButtonLinkTypeEnum from '../settings/ButtonLinkTypeEnum';
+import HorizontalAlignType from '../settings/HorizontalAlignType';
 
 export default class ButtonNode
   extends NodeBase
@@ -12,6 +13,7 @@ export default class ButtonNode
 {
   public text: string = __defaults.text;
   public title: string = __defaults.title;
+  public align: HorizontalAlignType = __defaults.align;
   public actionType: ButtonActionTypeEnum = __defaults.actionType;
   public linkType: ButtonLinkTypeEnum = __defaults.linkType;
   public linkText: string = __defaults.linkText;
@@ -33,6 +35,7 @@ export default class ButtonNode
     return {
       text: NodePropsSavingHelper.save(this.text, __defaults.text),
       title: NodePropsSavingHelper.save(this.title, __defaults.title),
+      align: NodePropsSavingHelper.save(this.align, __defaults.align),
       actionType: NodePropsSavingHelper.save(this.actionType, __defaults.actionType),
       linkType: NodePropsSavingHelper.save(this.linkType, __defaults.linkType),
       linkText: NodePropsSavingHelper.save(this.linkText, __defaults.linkText),
@@ -48,6 +51,7 @@ export default class ButtonNode
     super.load(obj);
     this.text = NodePropsSavingHelper.get(obj.text, __defaults.text);
     this.title = NodePropsSavingHelper.get(obj.title, __defaults.title);
+    this.align = NodePropsSavingHelper.get(obj.align, __defaults.align) as HorizontalAlignType;
     this.actionType = NodePropsSavingHelper.get(obj.actionType, __defaults.actionType);
     this.linkType = NodePropsSavingHelper.get(obj.linkType, __defaults.linkType);
     this.linkText = NodePropsSavingHelper.get(obj.linkText, __defaults.linkText);
@@ -74,6 +78,7 @@ interface SavedButtonNode extends INodeModel {
 const __defaults = {
   text: 'Button',
   title: '',
+  align: HorizontalAlignType.Default,
   actionType: ButtonActionTypeEnum.Nothing,
   linkType: ButtonLinkTypeEnum.SitePage,
   linkText: '#',

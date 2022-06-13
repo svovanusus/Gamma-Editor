@@ -17,11 +17,12 @@
 </template>
 
 <script lang="ts">
-import { Component } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 
 import ComponentWrapper from 'components/page/ComponentWrapper.vue';
 import NodeContainerComponentBase from 'components/page/NodeContainerComponentBase';
 import SimpleContainerNode from 'logic/model/page/Containers/SimpleContainerNode';
+import CssStylesheet from 'logic/model/style/CssStylesheet';
 
 @Component({
   name: 'SimpleContainerNodeComponent',
@@ -29,5 +30,31 @@ import SimpleContainerNode from 'logic/model/page/Containers/SimpleContainerNode
 })
 export default class SimpleContainerNodeComponent extends NodeContainerComponentBase<SimpleContainerNode> {
   public isChildHover: boolean = false;
+
+  @Watch('model.useFixedWidth')
+  @Watch('model.useFixedHeight')
+  @Watch('model.width', { deep: true })
+  @Watch('model.height', { deep: true })
+  public updateStyles(): void {
+    this.updateContainerStylesBase();
+  }
+
+  public applyStyles(stylesheet: CssStylesheet): void {
+    this.applyContainerNodeStylesBase(stylesheet);
+    const rule = stylesheet.forRule({ id: this.model.id });
+
+    if (this.model.useFixedWidth) {
+      rule.setProperty('width', this.model.width.toString());
+
+      if (this.model.margins.left.toString() === this.model.margins.right.toString()) {
+        rule.setProperty('margin-left', 'auto')
+            .setProperty('margin-right', 'auto');
+      }
+    }
+
+    if (this.model.useFixedHeight) {
+      rule.setProperty('height', this.model.height.toString());
+    }
+  }
 }
 </script>

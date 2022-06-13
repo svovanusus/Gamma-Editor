@@ -8,6 +8,7 @@ import DrawerTabEnum from 'model/DrawerTabs';
 import EditorModuleEnum from 'model/EditorModules';
 import NodeFactory from 'logic/model/NodeFactory';
 import NodeTypeEnum from 'logic/model/NodeTypeEnum';
+import EditorMode from 'model/EditorMode';
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export type StoreState = {
   drawerState: boolean;
   currentDrawerTab: DrawerTabEnum;
   nodesPanelActiveSectionName: string;
+  editorMode: EditorMode;
 };
 
 export const StoreTypes = {
@@ -50,6 +52,7 @@ const state: StoreState = {
   drawerState: true,
   currentDrawerTab: DrawerTabEnum.PROPS,
   nodesPanelActiveSectionName: null,
+  editorMode: EditorMode.Editing,
 };
 
 const getters: GetterTree<StoreState, StoreState> = {};

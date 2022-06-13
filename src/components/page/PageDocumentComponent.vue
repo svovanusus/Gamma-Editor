@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" :class="{ 'preview': isPreviewMode }">
     <component-wrapper :node="model" :componentId="model.id" :isChildrenHover="isChildHover">
       <template v-if="model.children.length">
         <component
@@ -24,6 +24,8 @@ import { Component } from 'vue-property-decorator';
 import ComponentWrapper from 'components/page/ComponentWrapper.vue';
 import NodeContainerComponentBase from 'components/page/NodeContainerComponentBase';
 import PageDocument from 'logic/model/page/PageDocument';
+import { StoreState } from 'store';
+import EditorMode from 'model/EditorMode';
 
 @Component({
   name: 'PageDocumentComponent',
@@ -31,5 +33,10 @@ import PageDocument from 'logic/model/page/PageDocument';
 })
 export default class PageDocumentComponent extends NodeContainerComponentBase<PageDocument> {
   public isChildHover: boolean = false;
+  public state: StoreState = this.$store.state;
+
+  public get isPreviewMode(): boolean {
+    return this.state.editorMode === EditorMode.Preview;
+  }
 }
 </script>

@@ -28,6 +28,10 @@ export default class CssMeasure implements ISavable<CssMeasure, SavedCssMeasure>
   clone(): CssMeasure {
     return new CssMeasure().load(this.save());
   }
+
+  toString(): string {
+    return `${this.value}${this.measureType}`;
+  }
 }
 
 const __defaults = {
